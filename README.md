@@ -12,11 +12,7 @@ Especially if you have this error:
 Error response from daemon: client version 1.25 is too old. Minimum supported API version is 1.44, please upgrade your client to a newer version
 ```
 
-If you like the project don't hesitate to star our repo!
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/image?repos=VinceGHER/watchtower-ecr&type=date&legend=top-left)](https://www.star-history.com/?repos=VinceGHER%2Fwatchtower-ecr&type=date&legend=top-left)
+Add a star if you like my project!
 
 ## Usage
 
