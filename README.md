@@ -1,31 +1,28 @@
 # WatchTower ECR
 A docker image based on [containrrr/watchtower](https://github.com/containrrr/watchtower/) for use with AWS ECR.
-Project Repository [taufiqpsumarna/watchtower-ecr](https://github.com/taufiqpsumarna/watchtower-ecr) Forked from [conveos/watchtower-ecr](https://github.com/conveos/watchtower-ecr)
+Project Repository [vincegh/watchtower-ecr](https://github.com/taufiqpsumarna/watchtower-ecr) Forked from [conveos/watchtower-ecr](https://github.com/conveos/watchtower-ecr)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/taufiq14s/watchtower-ecr.svg?style=flat-square)](https://hub.docker.com/r/taufiq14s/watchtower-ecr/)
-[![Docker Stars](https://img.shields.io/docker/stars/taufiq14s/watchtower-ecr.svg?style=flat-square)](https://hub.docker.com/r/taufiq14s/watchtower-ecr/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/vincegh/watchtower-ecr.svg?style=flat-square)](https://hub.docker.com/r/vincegh/watchtower-ecr/)
+[![Docker Stars](https://img.shields.io/docker/stars/vincegh/watchtower-ecr.svg?style=flat-square)](https://hub.docker.com/r/vincegh/watchtower-ecr/)
+
+This repository is update to date with the latest version of docker 29 and with AWS ECR.
+
+Especially if you have this error: 
+```
+Error response from daemon: client version 1.25 is too old. Minimum supported API version is 1.44, please upgrade your client to a newer version
+```
+
+If you like the project don't hesitate to star our repo!
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/image?repos=VinceGHER/watchtower-ecr&type=date&legend=top-left)](https://www.star-history.com/?repos=VinceGHER%2Fwatchtower-ecr&type=date&legend=top-left)
 
 ## Usage
 
 ### Build Docker Image (optional)
 Installation based on [Amazon ECR Credential Helper installation from source](https://github.com/awslabs/amazon-ecr-credential-helper?tab=readme-ov-file#from-source) and [containrrr/watchtower](https://github.com/containrrr/watchtower/) docker image
 
-```yaml
-FROM alpine:3.20.3 AS build
-
-# https://github.com/awslabs/amazon-ecr-credential-helper#installing
-RUN apk add --no-cache libc6-compat gcc g++ git go
-RUN export GOPATH=$HOME/go && export PATH=$PATH:$GOPATH/bin
-RUN go install github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login@latest
-
-# Final image has to be alpine, scratch doesn't support our env vars or credentials file
-FROM alpine:3.20.3
-COPY --from=containrrr/watchtower:latest / /
-COPY --from=build /root/go/bin/docker-credential-ecr-login /bin/docker-credential-ecr-login
-COPY ./docker/config.json /config.json
-
-ENTRYPOINT ["/watchtower"]
-```
 ### Docker Run
 
 Run the container with the following command:
@@ -36,7 +33,7 @@ docker run -d \
   -e "AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>" \
   -e "AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>" \
   -e "AWS_REGION=<AWS_REGION>"
-  taufiq14s/watchtower-ecr:latest --interval 300 --cleanup
+  vincegh/watchtower-ecr:latest --interval 300 --cleanup
 ```
 
 ### Docker Compose
